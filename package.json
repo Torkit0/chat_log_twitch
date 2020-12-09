@@ -1,0 +1,22 @@
+{
+  "name": "chat_log_twitch",
+  "version": "1.0.0",
+  "description": "It logs the chats of the steamers in the JSON file in a .log file.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Torkit0/chat_log_twitch.git"
+  },
+  "keywords": [
+    "Logger"
+  ],
+  "author": "Tor_kit",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Torkit0/chat_log_twitch/issues"
+  },
+  "homepage": "https://github.com/Torkit0/chat_log_twitch#readme"
+}
