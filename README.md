@@ -1,4 +1,4 @@
-# Project Title
+# Chat Logger
 
 This is an app to log what users say in a specific Twitch chat. It can log multiple channels
 and it creates folders for each channel, in these folders a .log file is created with the name format: dd-mm-yyyy.log
@@ -6,9 +6,9 @@ and it creates folders for each channel, in these folders a .log file is created
 
 ## Summary
 
-  - [Getting Started](#getting-started)
-  - [Running the app](#running-the-app)
-  - [Versioning](#versioning)
+  - [Getting Started]
+  - [Running the app]
+  - [Versioning]
 
 ## Getting Started
 
