@@ -10,7 +10,7 @@ These instructions will instruct you on how to set it up on your machine.
 
 ### Prerequisites
 
-  You need a computer or server running Linux OS
+  You need a computer or server running Linux OS (I have not tried on Windows)
 
 ### Installing
 
