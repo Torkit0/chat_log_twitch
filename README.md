@@ -22,7 +22,7 @@ How to get the development enviroment up and going
 
 ## Running the app
 
-To run the test after you've installed the necessary packages, do **node index.js** in the same folder that the file is in
+To run the test after you've installed the necessary packages, do **node index.js** or **npm run main** in the same folder that the file is in
 
 ## Versioning
 
