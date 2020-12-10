@@ -15,10 +15,6 @@ const client = new tmi.client(opts);
 client.on("message", onMessageHandler);
 client.on("connected", onConnectedHandler);
 
-var dateNow = new Date();
-const time = `${dateNow.getHours()}:${dateNow.getMinutes()}:${dateNow.getSeconds()}`
-const date = `${dateNow.getDate()}-${dateNow.getMonth() + 1}-${dateNow.getFullYear()}`
-
 client.connect(); // Connect to Twitch:
 
 function checkName(nameTV){ // Checks if the username that posted the message is tor_kit, you can change it by changing "tor_kit" to your username
@@ -28,6 +24,9 @@ function checkName(nameTV){ // Checks if the username that posted the message is
 // Called every time a message comes in
 function onMessageHandler (target, tags, msg, self) {
   if (self) { return; } // Ignores messages from the bot
+      var dateNow = new Date();
+      const time = `${dateNow.getHours()}:${dateNow.getMinutes()}:${dateNow.getSeconds()}`
+      const date = `${dateNow.getDate()}-${dateNow.getMonth() + 1}-${dateNow.getFullYear()}`
       const fileName = `${date}.log`
       const dir = `./${target}/${fileName}`
       try{
