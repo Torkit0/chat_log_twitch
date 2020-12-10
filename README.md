@@ -26,4 +26,4 @@ To run the test after you've installed the necessary packages, do **node index.j
 
 ## Versioning
 
-I use [SemVer](http://semver.org/) for versioning.
+I use [SemVer](http://semver.org/) when updating the version of the app.
