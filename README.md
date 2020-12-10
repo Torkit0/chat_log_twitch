@@ -4,12 +4,6 @@ This is an app to log what users say in a specific Twitch chat. It can log multi
 and it creates folders for each channel, in these folders a .log file is created with the name format: dd-mm-yyyy.log
 
 
-## Summary
-
-  - [Getting Started]
-  - [Running the app]
-  - [Versioning]
-
 ## Getting Started
 
 These instructions will instruct you on how to set it up on your machine.
