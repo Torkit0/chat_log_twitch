@@ -1,5 +1,4 @@
 const tmi = require("tmi.js");
-require("dotenv").config();
 const fetch = require("node-fetch");
 const fs = require("fs");
 const { query } = require("express");
@@ -16,19 +15,20 @@ const client = new tmi.client(opts);
 client.on("message", onMessageHandler);
 client.on("connected", onConnectedHandler);
 
+var dateNow = new Date();
+const time = `${dateNow.getHours()}:${dateNow.getMinutes()}:${dateNow.getSeconds()}`
+const date = `${dateNow.getDate()}-${dateNow.getMonth() + 1}-${dateNow.getFullYear()}`
+
 client.connect(); // Connect to Twitch:
 
-function torkit(nameTV){ // Checks if the username that posted the message is tor_kit
-  return nameTV === "tor_kit";
+function checkName(nameTV){ // Checks if the username that posted the message is tor_kit, you can change it by changing "tor_kit" to your username
+  return nameTV === "tor_kit"; // Only that user can add channels to the list of logged chats
 };
 
 // Called every time a message comes in
 function onMessageHandler (target, tags, msg, self) {
   if (self) { return; } // Ignores messages from the bot
-      var dateNow = new Date();
-      const time = `${dateNow.getHours()}:${dateNow.getMinutes()}:${dateNow.getSeconds()}`
-      const date = `${dateNow.getDate()}-${dateNow.getMonth()}-${dateNow.getFullYear()}`
-      const fileName = `${target}-${date}.log`
+      const fileName = `${date}.log`
       const dir = `./${target}/${fileName}`
       try{
         if(!fs.existsSync(dir)){ // Checks if a folder and file exists for the streamer, if it does not then it creates one
@@ -44,13 +44,13 @@ function onMessageHandler (target, tags, msg, self) {
       } catch(err){
           if (err) console.log(err)
       }
-}
   if (msg.includes("#log")){
-    if(torkit(tags.username)){ // Checks if the user is authorized to add a channel
+    if(checkName(tags.username)){ // Checks if the user is authorized to add a channel
         opts.channels.push(`#${msg.slice(5)}`); // Adds the channel specified to the JSON
         fs.writeFileSync("opts.json", JSON.stringify(opts))
         client.join(`#${msg.slice(5)}`); // Joins the channel
       }
+}
 };
 // Called every time the bot connects to Twitch chat
 function onConnectedHandler (addr, port) {
