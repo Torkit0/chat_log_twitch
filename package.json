@@ -18,5 +18,11 @@
   "bugs": {
     "url": "https://github.com/Torkit0/chat_log_twitch/issues"
   },
-  "homepage": "https://github.com/Torkit0/chat_log_twitch#readme"
+  "homepage": "https://github.com/Torkit0/chat_log_twitch#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1",
+    "tmi.js": "^1.5.0"
+  }
 }

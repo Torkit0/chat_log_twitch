@@ -29,8 +29,9 @@ function onMessageHandler (target, tags, msg, self) {
       const date = `${dateNow.getDate()}-${dateNow.getMonth() + 1}-${dateNow.getFullYear()}`
       const fileName = `${date}.log`
       const dir = `./${target}/${fileName}`
+      const folder = `${target}`
       try{
-        if(!fs.existsSync(dir)){ // Checks if a folder and file exists for the streamer, if it does not then it creates one
+        if(!fs.existsSync(folder)){ // Checks if a folder exists for the streamer, if it does not then it creates one
             fs.mkdir(target, (err) => {
               if (err) throw err;
             })
@@ -38,7 +39,12 @@ function onMessageHandler (target, tags, msg, self) {
             fs.writeFileSync(dir, `${target}\n#Started logging at [${date} ${time}]\n`) // Writes the first line
             fs.appendFileSync(dir, `\n[${time}] ${tags.username}: ${msg}`); // Appends the message as to the .log file
         } else {
-          fs.appendFileSync(dir, `\n[${time}] ${tags.username}: ${msg}`); // If file exists it appends the message that was sent
+          if (!fs.existsSync(dir)){
+            fs.writeFileSync(dir, `${target}\n#Started logging at [${date} ${time}]\n`) // Writes the first line
+            fs.appendFileSync(dir, `\n[${time}] ${tags.username}: ${msg}`); // If file exists it appends the message that was sent
+          } else {
+            fs.appendFileSync(dir, `\n[${time}] ${tags.username}: ${msg}`); // If file exists it appends the message that was sent
+          }
         }
       } catch(err){
           if (err) console.log(err)
