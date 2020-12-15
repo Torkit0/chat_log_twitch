@@ -20,7 +20,7 @@ How to get the development enviroment up and going
     
     Change the opts.json file by removing "#torkitisthebest" and adding your own channel or the 
     channel you want to use to do the command "#log xQcOW" f.e. But remember to have a hashtag (#) in 
-    front of the username.
+    front of the username in the opts.json file.
     
     npm install tmi.js, node-fetch, fs, express, colors
 
