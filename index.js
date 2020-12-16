@@ -31,16 +31,24 @@ function onMessageHandler (target, tags, msg, self) {
       const dir = `./${target}/${fileName}`
       const folder = `${target}`
       try{
-        if(!fs.existsSync(folder)){ // Checks if a folder exists for the streamer, if it does not then it creates one
+        if(!fs.existsSync(folder, function(err){
+          if (err) throw err;
+        })){ // Checks if a folder exists for the streamer, if it does not then it creates one
             fs.mkdir(target, (err) => {
               if (err) throw err;
             })
             console.log(`Directory [${dir}] created!`.bgGreen.black);
-            fs.writeFileSync(dir, `${target}\n#Started logging at [${date} ${time}]\n`) // Writes the first line
+            fs.writeFile(dir, `${target}\n#Started logging at [${date} ${time}]\n`, function(err){
+              if (err) throw err;
+            }) // Writes the first line
             fs.appendFileSync(dir, `\n[${time}] ${tags.username}: ${msg}`); // Appends the message as to the .log file
         } else {
-          if (!fs.existsSync(dir)){
-            fs.writeFileSync(dir, `${target}\n#Started logging at [${date} ${time}]\n`) // Writes the first line
+          if (!fs.existsSync(dir, function(err){
+            if (err) throw err;
+          })){
+            fs.writeFileSync(dir, `${target}\n#Started logging at [${date} ${time}]\n`, function(err){
+              if (err) throw err;
+            }) // Writes the first line
             fs.appendFileSync(dir, `\n[${time}] ${tags.username}: ${msg}`); // If file exists it appends the message that was sent
           } else {
             fs.appendFileSync(dir, `\n[${time}] ${tags.username}: ${msg}`); // If file exists it appends the message that was sent
@@ -50,11 +58,18 @@ function onMessageHandler (target, tags, msg, self) {
           if (err) console.log(err)
       }
   if (msg.includes("#log")){
+    const msgSlice = msg.slice(5)
     if(checkName(tags.username)){ // Checks if the user is authorized to add a channel
-        opts.channels.push(`#${msg.slice(5)}`); // Adds the channel specified to the JSON
+      if (!msgSlice.includes("#")){
+        opts.channels.push(`#${msgSlice}`); // Adds the channel specified to the JSON
         fs.writeFileSync("opts.json", JSON.stringify(opts))
-        client.join(`#${msg.slice(5)}`); // Joins the channel
+        client.join(`#${msgSlice}`); // Joins the channel
+      } else {
+        opts.channels.push(`${msgSlice}`); // Adds the channel specified to the JSON
+        fs.writeFileSync("opts.json", JSON.stringify(opts))
+        client.join(`${msgSlice}`); // Joins the channel
       }
+    }
 }
 };
 // Called every time the bot connects to Twitch chat
