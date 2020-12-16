@@ -19,8 +19,7 @@ How to get the development enviroment up and going
     Download & Install Node.js
     
     Change the opts.json file by removing "#torkitisthebest" and adding your own channel or the 
-    channel you want to use to do the command "#log xQcOW" f.e. But remember to have a hashtag (#) in 
-    front of the username in the opts.json file.
+    channel you want to use to do the command "#log xQcOW" f.e. When typing the command in chat to log the channel, type either with (#log #xQcOW) or without (#log     xQcOW) the hashtag.
     
     npm install tmi.js, node-fetch, fs, express, colors
 
