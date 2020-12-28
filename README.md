@@ -2,6 +2,7 @@
 
 This is an app to log what users say in a specific Twitch chat. It can log multiple channels
 and it creates folders for each channel, in these folders a .log file is created with the name format: dd-mm-yyyy.log
+The program will only of course work if you keep the computer/server on.
 
 
 ## Getting Started
@@ -10,7 +11,7 @@ These instructions will instruct you on how to set it up on your machine.
 
 ### Prerequisites
 
-  You need a computer or server running Linux OS (I have not tried on Windows)
+  You need a computer or server running Linux OS
 
 ### Installing
 
