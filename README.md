@@ -4,6 +4,9 @@ This is an app to log what users say in a specific Twitch chat. It can log multi
 and it creates folders for each channel, in these folders a .log file is created with the name format: dd-mm-yyyy.log
 The program will only of course work if you keep the computer/server on.
 
+It currently logs some badges, list of badges are here:
+          Broadcaster, Partner, Moderator, Founder, x months subbed, Bit Badge x, Bits Charity,
+          Prime, Turbo, Prediction, GL-HF Pledge, GlitchCon2020
 
 ## Getting Started
 
