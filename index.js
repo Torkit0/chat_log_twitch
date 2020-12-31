@@ -36,13 +36,21 @@ function onMessageHandler (target, tags, msg, self) {
         if (tags.badges.broadcaster){ badges.push("broadcaster") }
         if (tags.badges.partner){ badges.push("partner") }
         if (tags.mod){ badges.push("mod") }
+        if (tags.badges.vip){badges.push("vip")}
         if (tags.badges.founder){ badges.push("founder") }
-        if (tags["badge-info"]){ badges.push(tags["badge-info"].subscriber+"m_sub") }
+        if (tags["badge-info"]){
+          if (tags["badge-info"].subscriber){ badges.push(tags["badge-info"].subscriber[0]+"m_sub") }
+          else if(tags["badge-info"].founder) { badges.push(tags["badge-info"].founder[0]+"m_sub") }
+          else { }
+        }
         if (tags.badges.bits){ badges.push(tags.badges.bits+"_bits") }
         if (tags.badges["bits-charity"]){ badges.push("bits-charity") }
+        if (tags.badges["bits-leader"]){ badges.push(tags.badges["bits-leader"]+"_bits_leader") }
         if (tags.badges.premium){ badges.push("prime") }
         if (tags.turbo){ badges.push("turbo") }
         if (tags.badges.predictions){ badges.push(tags.badges.predictions) }
+        if (tags.badges["sub-gift-leader"]){ badges.push(tags.badges["sub-gift-leader"]+"_gift_leader") }
+        
         if (tags.badges["sub-gifter"]){ badges.push(tags.badges["sub-gifter"]+"_gifted") }
         if (tags.badges["glhf-pledge"]){ badges.push("glhf-pledge") }
         if (tags.badges.glitchcon2020){ badges.push("glitchCon2020") }
@@ -55,7 +63,6 @@ function onMessageHandler (target, tags, msg, self) {
         if(!fs.existsSync(folder, function(err){
           if (err) console.log(err);
         })){ // Checks if a folder exists for the streamer, if it does not then it creates one
-          console.log("Have to create file")
             fs.mkdir(streamWHashtag, function(err) {
               if (err) throw err;
             })
@@ -81,6 +88,7 @@ function onMessageHandler (target, tags, msg, self) {
           }
         }
       } catch(err){
+        console.log("In catch statement")
         try{
           if(!fs.existsSync(folder, function(err){
             if (err) console.log(err);
