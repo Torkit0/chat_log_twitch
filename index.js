@@ -81,7 +81,6 @@ function onMessageHandler (target, tags, msg, self) {
           }
         }
       } catch(err){
-        console.log("In catch statement")
         try{
           if(!fs.existsSync(folder, function(err){
             if (err) console.log(err);
