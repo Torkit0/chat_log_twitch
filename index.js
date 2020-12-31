@@ -29,15 +29,15 @@ function onMessageHandler (target, tags, msg, self) {
       var time = `${dateNow.getHours()}:${dateNow.getMinutes()}:${dateNow.getSeconds()}`
       var date = `${dateNow.getDate()}-${dateNow.getMonth() + 1}-${dateNow.getFullYear()}`
       var fileName = `${date}.log`
-      var dir = `./${target}/${fileName}`
-      var folder = `${target}`
+      var dir = `./${streamWHashtag}/${fileName}`
+      var folder = `${streamWHashtag}`
 
       if (tags.badges){
         if (tags.badges.broadcaster){ badges.push("broadcaster") }
         if (tags.badges.partner){ badges.push("partner") }
         if (tags.mod){ badges.push("mod") }
         if (tags.badges.founder){ badges.push("founder") }
-        if (tags.badges.subscriber){ badges.push(tags["badge-info"].subscriber+"m_sub") }
+        if (tags["badge-info"]){ badges.push(tags["badge-info"].subscriber+"m_sub") }
         if (tags.badges.bits){ badges.push(tags.badges.bits+"_bits") }
         if (tags.badges["bits-charity"]){ badges.push("bits-charity") }
         if (tags.badges.premium){ badges.push("prime") }
@@ -55,11 +55,12 @@ function onMessageHandler (target, tags, msg, self) {
         if(!fs.existsSync(folder, function(err){
           if (err) console.log(err);
         })){ // Checks if a folder exists for the streamer, if it does not then it creates one
-            fs.mkdir(target, function(err) {
+          console.log("Have to create file")
+            fs.mkdir(streamWHashtag, function(err) {
               if (err) throw err;
             })
             console.log(`Directory [${dir}] created!`.bgGreen.black);
-            fs.writeFile(dir, `#First message logged at [${date} ${time}] in ${target}\n`, (err) => {
+            fs.writeFileSync(dir, `#First message logged at [${date} ${time}] in ${target}\n#Badges f.e (1m_sub) show the months sub, not sub badge.`, (err) => {
               if (err) throw err;
             }) // Writes the first line
             fs.appendFileSync(dir, msgAppend); // Appends the message to the .log file
@@ -80,7 +81,37 @@ function onMessageHandler (target, tags, msg, self) {
           }
         }
       } catch(err){
-          if (err) console.log(err)
+        console.log("In catch statement")
+        try{
+          if(!fs.existsSync(folder, function(err){
+            if (err) console.log(err);
+          })){ // Checks if a folder exists for the streamer, if it does not then it creates one
+            console.log("Have to create file")
+              fs.mkdir(streamWHashtag, function(err) {
+                if (err) throw err;
+              })
+              console.log(`Directory [${dir}] created!`.bgGreen.black);
+              fs.writeFileSync(dir, `#First message logged at [${date} ${time}] in ${target}\n`, (err) => {
+                if (err) throw err;
+              }) // Writes the first line
+              fs.appendFileSync(dir, msgAppend); // Appends the message to the .log file
+          } else {
+            if (!fs.existsSync(dir, function(err){
+              if (err) throw err;
+            })){
+              fs.writeFile(dir, `#First message logged at [${date} ${time}] in ${target}\n`, (err) => {
+                if (err) throw err;
+              }) // Writes the first line
+              fs.appendFileSync(dir, msgAppend, (err) => {
+                if (err) throw err;
+              }); // If file exists it appends the message that was sent
+            } else {
+              fs.appendFileSync(dir, msgAppend, (err) => {
+                if (err) throw err;
+              }); // If file exists it appends the message that was sent
+            }
+          }
+        } finally { }
       }
   if (msg.includes("#log")){
     var msgSlice = msg.slice(5)
